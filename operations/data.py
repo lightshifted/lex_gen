@@ -39,7 +39,7 @@ def tokenize_text(text, model_name: str="gpt2", padding_side: str="right", conte
 
 
 class DataLoads(Dataset):
-
+    """A barebones dataloader class for PyTorch."""
     def __init__(self, X, Mask):
         self.x = X
         self.mask = Mask
@@ -81,3 +81,14 @@ def stage_data(xtrain: torch.tensor,
     val_loader = DataLoads(xval, xval_mask)
     
     return train_loader, val_loader
+
+
+def get_tokenizer(model_name: str="gpt2", padding_side:str="right"):
+    # Instantiate tokenizer and pass `gpt2` to the `from_pretrained` method 
+    tokenizer = GPT2TokenizerFast.from_pretrained(model_name)
+    # Select token to uses as `pad_token`
+    tokenizer.pad_token = tokenizer.eos_token
+    # Default to right padding
+    tokenizer.padding_side = padding_side
+    
+    return tokenizer  

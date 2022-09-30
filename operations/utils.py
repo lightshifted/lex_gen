@@ -3,8 +3,28 @@ import os
 import pandas as pd
 import numpy as np
 from glob import glob
+import random
+import json
 
-# -----------------------------------------------------------------------------
+def set_seeds(seed=77):
+    """Set seeds for reproducibility."""
+    np.random.seed(seed)
+    random.seed(seed)
+
+
+def load_dict(filepath):
+    """Load a dictionary from a JSON's filepath."""
+    with open(filepath, "r") as fp:
+        d = json.load(fp)
+    return d
+
+
+def save_dict(d, filepath, cls=None, sortkeys=False):
+    """Save a dictionary to a specific location."""
+    with open(filepath, "w") as fp:
+        json.dump(d, indent=2, fp=fp, cls=cls, sort_keys=sortkeys)
+
+
 def read_text(path:str="./transcripts/corpus", file_name: str="corpus.txt"):
     with open(f'{path}/{file_name}', 'r', encoding='utf-8') as f:
         texts = f.read()
