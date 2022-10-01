@@ -13,15 +13,16 @@ args = TrainingArguments(
     per_device_train_batch_size=16,
     per_device_eval_batch_size=16,
     evaluation_strategy="steps",
-    eval_steps=100,
-    logging_steps=100,
+    eval_steps=3000,
+    logging_strategy="epoch",
     logging_dir='logs/',
-    gradient_accumulation_steps=8,
+    gradient_accumulation_steps=4,
     num_train_epochs=1,
     weight_decay=0.1,
     warmup_steps=10,
     lr_scheduler_type="cosine",
     learning_rate=5e-4,
+    save_strategy="steps",
     save_steps=200,
     fp16=True,
     push_to_hub=False,
@@ -36,14 +37,19 @@ class PrinterCallback(ProgressCallback):
         _ = logs.pop("total_flos", None)
         if state.is_local_process_zero:
             logger.info(logs)
-            logger.info(args)
+            # logger.info(args)
             logger.info(state)
-            print(logs['train_loss'])
+            print(logs)
 
-callback = PrinterCallback()
 
-def train(args: transformers.TrainingArguments=args, trial: bool=False, optimize=False, callback=callback):
-    """Training loop for the finetuning of model parameters."""
+def train(args: transformers.TrainingArguments, trial: bool=False, optimize=False):
+    """Training loop for the fine-tuning of model parameters.
+
+    Args:
+        args (transformers.TrainingArguments, optional): _description_. Defaults to args.
+        trial (bool, optional): _description_. Defaults to False.
+        optimize (bool, optional): _description_. Defaults to False.
+    """
 
     # Setup
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -72,6 +78,7 @@ def train(args: transformers.TrainingArguments=args, trial: bool=False, optimize
     logger.info(f"number of model parameters: {model_size/1000**2:.1f}M")
     
     # Training Loop
+    callback = PrinterCallback()
     trainer = Trainer(
         model=model,
         tokenizer=tokenizer,

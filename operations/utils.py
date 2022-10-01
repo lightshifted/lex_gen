@@ -7,32 +7,63 @@ import random
 import json
 
 def set_seeds(seed=77):
-    """Set seeds for reproducibility."""
+    """Set seeds for reproducibility.
+
+    Args:
+        seed (int, optional): _description_. Defaults to 77.
+    """
     np.random.seed(seed)
     random.seed(seed)
 
 
 def load_dict(filepath):
-    """Load a dictionary from a JSON's filepath."""
+    """Load a dictionary from a JSON's filepath.
+
+    Args:
+        filepath (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     with open(filepath, "r") as fp:
         d = json.load(fp)
     return d
 
 
 def save_dict(d, filepath, cls=None, sortkeys=False):
-    """Save a dictionary to a specific location."""
+    """Save a dictionary to a specific location.
+
+    Args:
+        d (_type_): _description_
+        filepath (_type_): _description_
+        cls (_type_, optional): _description_. Defaults to None.
+        sortkeys (bool, optional): _description_. Defaults to False.
+    """
     with open(filepath, "w") as fp:
         json.dump(d, indent=2, fp=fp, cls=cls, sort_keys=sortkeys)
 
 
 def read_text(path:str="./transcripts/corpus", file_name: str="corpus.txt"):
+    """Collect corpus from path.
+
+    Args:
+        path (str, optional): _description_. Defaults to "./transcripts/corpus".
+        file_name (str, optional): _description_. Defaults to "corpus.txt".
+
+    Returns:
+        _type_: _description_
+    """
     with open(f'{path}/{file_name}', 'r', encoding='utf-8') as f:
         texts = f.read()
     return texts
 
 
-def convert_vtt(filenames):
-    """ Convert vtt files to text files """
+def convert_vtt(filenames) -> None:
+    """Convert vtt files to text files.
+
+    Args:
+        filenames (_type_): _description_
+    """
     for filename in filenames:
         webvtt.from_srt(filename).save_as_srt(filename.replace('.vtt', '.srt'))
     # create asset folder if one doesn't already exist
@@ -51,6 +82,12 @@ def convert_vtt(filenames):
 
 
 def prepare_corpus(inPath: str, outPath: str) -> None:
+    """Prepares text corpus.
+
+    Args:
+        inPath (str): _description_
+        outPath (str): _description_
+    """
     # collect paths for each transcript file
     paths = glob(f"{inPath}*.csv", recursive=True)
 
