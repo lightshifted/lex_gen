@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>data - LexGen</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+        <link href="../../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "data";
+        var mkdocs_page_input_path = "operations\\data.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> LexGen
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">workflows</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../main/">main</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">operations</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">data</a>
+    <ul class="current">
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../train/">train</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../utils/">utils</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">LexGen</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+          <li>operations &raquo;</li>
+      <li>data</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/masslightsquared/lex_gen/edit/master/docs/operations/data.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div class="doc doc-object doc-module">
+
+<a id="operations.data"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="operations.data.DataLoads" class="doc doc-heading">
+        <code>
+DataLoads            (<span title="torch.utils.data.dataset.Dataset">Dataset</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>A barebones dataloader class for PyTorch.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>operations\data.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DataLoads</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A barebones dataloader class for PyTorch.&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Mask</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">X</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">Mask</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;input_ids&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span>
+            <span class="s1">&#39;attention_mask&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">mask</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span>
+        <span class="p">}</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="operations.data.data_split" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">data_split</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">train_split</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Split inputs into train and dev sets.</p>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li><p><strong>tokens</strong> (<code>Dict</code>) – <em>description</em></p></li>
+            <li><p><strong>train_split</strong> (<code>float</code>) – <em>description</em>. Defaults to 0.8.</p></li>
+            <li><p><strong>validation_split</strong> (<code>float</code>) – <em>description</em>. Defaults to 0.9.</p></li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+        <ul class="first simple">
+          <li><p><code>torch.Tensor</code> – <em>description</em></p></li>
+        </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>operations\data.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">data_split</span><span class="p">(</span><span class="n">tokens</span><span class="p">:</span> <span class="n">Dict</span> <span class="p">,</span> <span class="n">train_split</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">validation_split</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Split inputs into train and dev sets.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tokens (Dict): _description_</span>
+<span class="sd">        train_split (float, optional): _description_. Defaults to 0.8.</span>
+<span class="sd">        validation_split (float, optional): _description_. Defaults to 0.9.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        torch.Tensor: _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="s2">&quot;input_ids&quot;</span> <span class="ow">and</span> <span class="s2">&quot;attention_mask&quot;</span> <span class="ow">in</span> <span class="n">tokens</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+    <span class="n">n1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">train_split</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]))</span>
+    <span class="n">n2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">validation_split</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]))</span>
+
+    <span class="n">Xtr</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">][:</span><span class="n">n1</span><span class="p">]</span>
+    <span class="n">tr_mask</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="s1">&#39;attention_mask&#39;</span><span class="p">][:</span><span class="n">n1</span><span class="p">]</span>
+
+    <span class="n">Xval</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">][</span><span class="n">n1</span><span class="p">:</span><span class="n">n2</span><span class="p">]</span>
+    <span class="n">val_mask</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="s1">&#39;attention_mask&#39;</span><span class="p">][</span><span class="n">n1</span><span class="p">:</span><span class="n">n2</span><span class="p">]</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">Xtr</span><span class="o">.</span><span class="n">shape</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">Xval</span><span class="o">.</span><span class="n">shape</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Xtr</span><span class="p">,</span> <span class="n">tr_mask</span><span class="p">,</span> <span class="n">Xval</span><span class="p">,</span> <span class="n">val_mask</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="operations.data.get_tokenizer" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_tokenizer</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;gpt2&#39;</span><span class="p">,</span> <span class="n">padding_side</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Instantiates tokenizer.</p>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li><p><strong>model_name</strong> (<code>str</code>) – <em>description</em>. Defaults to "gpt2".</p></li>
+            <li><p><strong>padding_side</strong> (<code>str</code>) – <em>description</em>. Defaults to "right".</p></li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+        <ul class="first simple">
+          <li><p><code>GPT2TokenizerFast</code> – Instantiated tokenizer class.</p></li>
+        </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>operations\data.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_tokenizer</span><span class="p">(</span><span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;gpt2&quot;</span><span class="p">,</span> <span class="n">padding_side</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GPT2TokenizerFast</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Instantiates tokenizer.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model_name (str, optional): _description_. Defaults to &quot;gpt2&quot;.</span>
+<span class="sd">        padding_side (str, optional): _description_. Defaults to &quot;right&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        GPT2TokenizerFast: Instantiated tokenizer class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Instantiate tokenizer and pass `gpt2` to the `from_pretrained` method </span>
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">GPT2TokenizerFast</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+    <span class="c1"># Select token to uses as `pad_token`</span>
+    <span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">eos_token</span>
+    <span class="c1"># Default to right padding</span>
+    <span class="n">tokenizer</span><span class="o">.</span><span class="n">padding_side</span> <span class="o">=</span> <span class="n">padding_side</span>
+
+    <span class="k">return</span> <span class="n">tokenizer</span>  
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="operations.data.stage_data" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">stage_data</span><span class="p">(</span><span class="n">xtrain</span><span class="p">,</span> <span class="n">xtrain_mask</span><span class="p">,</span> <span class="n">xval</span><span class="p">,</span> <span class="n">xval_mask</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Loads tokenized data to customized DataLoads class for input to model.</p>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li><p><strong>xtrain</strong> (<code>torch.tensor</code>) – <em>description</em></p></li>
+            <li><p><strong>xtrain_mask</strong> (<code>torch.tensor</code>) – <em>description</em></p></li>
+            <li><p><strong>xval</strong> (<code>torch.tensor</code>) – <em>description</em></p></li>
+            <li><p><strong>xval_mask</strong> (<code>torch.tensor</code>) – <em>description</em></p></li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+        <ul class="first simple">
+          <li><p><code>Dataset</code> – <em>description</em></p></li>
+        </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>operations\data.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">stage_data</span><span class="p">(</span><span class="n">xtrain</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">,</span>
+               <span class="n">xtrain_mask</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">,</span> 
+               <span class="n">xval</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">,</span> 
+               <span class="n">xval_mask</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dataset</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Loads tokenized data to customized DataLoads class for input to model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        xtrain (torch.tensor): _description_</span>
+<span class="sd">        xtrain_mask (torch.tensor): _description_</span>
+<span class="sd">        xval (torch.tensor): _description_</span>
+<span class="sd">        xval_mask (torch.tensor): _description_</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dataset: _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoads</span><span class="p">(</span><span class="n">xtrain</span><span class="p">,</span> <span class="n">xtrain_mask</span><span class="p">)</span>
+    <span class="n">val_loader</span> <span class="o">=</span> <span class="n">DataLoads</span><span class="p">(</span><span class="n">xval</span><span class="p">,</span> <span class="n">xval_mask</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="operations.data.tokenize_text" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">tokenize_text</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;gpt2&#39;</span><span class="p">,</span> <span class="n">padding_side</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">context_length</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">tokenizer_only</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Prepares inputs for a model. Utilizes Hugging Face's PreTrainedTokenizer base class.</p>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li><p><strong>text</strong> (<code>str</code>) – The sequence or batch of sequences to be encoded.</p></li>
+            <li><p><strong>model_name</strong> (<code>str</code>) – Model name. Defaults to "gpt2".</p></li>
+            <li><p><strong>padding_side</strong> (<code>str</code>) – The default value for the side on which the model should have padding applied. Should be 'right' or 'left'. Defaults to "right".</p></li>
+            <li><p><strong>context_length</strong> (<code>int</code>) – The length of input sequences fed to the model. Defaults to 256.</p></li>
+            <li><p><strong>tokenizer_only</strong> (<code>bool</code>) – Returns only the instantiated tokenizer class when set to 'True'. Defaults to False.</p></li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+        <ul class="first simple">
+          <li><p><code>BatchEncoding</code> – (input_ids, attention_mask...)</p></li>
+        </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>operations\data.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">tokenize_text</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;gpt2&quot;</span><span class="p">,</span> <span class="n">padding_side</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">context_length</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">tokenizer_only</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BatchEncoding</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Prepares inputs for a model. Utilizes Hugging Face&#39;s PreTrainedTokenizer base class.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        text (str): The sequence or batch of sequences to be encoded.</span>
+<span class="sd">        model_name (str, optional): Model name. Defaults to &quot;gpt2&quot;.</span>
+<span class="sd">        padding_side (str, optional): The default value for the side on which the model should have padding applied. Should be &#39;right&#39; or &#39;left&#39;. Defaults to &quot;right&quot;.</span>
+<span class="sd">        context_length (int, optional): The length of input sequences fed to the model. Defaults to 256.</span>
+<span class="sd">        tokenizer_only (bool, optional): Returns only the instantiated tokenizer class when set to &#39;True&#39;. Defaults to False.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        BatchEncoding: (input_ids, attention_mask...)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Instantiate tokenizer and pass `gpt2` to the `from_pretrained` method </span>
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">GPT2TokenizerFast</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+    <span class="c1"># Select token to uses as `pad_token`</span>
+    <span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">eos_token</span>
+    <span class="c1"># Default to right padding</span>
+    <span class="n">tokenizer</span><span class="o">.</span><span class="n">padding_side</span> <span class="o">=</span> <span class="n">padding_side</span>
+    <span class="c1"># Set context length</span>
+    <span class="n">context_length</span> <span class="o">=</span> <span class="n">context_length</span>
+
+    <span class="k">if</span> <span class="n">tokenizer_only</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tokenizer</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">)</span>
+
+    <span class="c1"># Process text</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> 
+                       <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;longest&#39;</span><span class="p">,</span>
+                       <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">,</span>
+                       <span class="n">max_length</span><span class="o">=</span><span class="n">context_length</span><span class="p">,</span> <span class="c1"># context size GPT-2: 1,024, GPT-3: 2,048</span>
+                       <span class="n">return_overflowing_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># tokenize input and split into chunks</span>
+                       <span class="n">return_length</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># return length of each created chunk</span>
+                       <span class="n">return_special_tokens_mask</span><span class="o">=</span><span class="kc">True</span>
+                      <span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input IDs length: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">inputs</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input chunk lengths: </span><span class="si">{</span><span class="p">(</span><span class="n">inputs</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chunk mapping: </span><span class="si">{</span><span class="n">inputs</span><span class="p">[</span><span class="s1">&#39;overflow_to_sample_mapping&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">inputs</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../main/" class="btn btn-neutral float-left" title="main"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../train/" class="btn btn-neutral float-right" title="train">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/masslightsquared/lex_gen" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../main/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../train/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
