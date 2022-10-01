@@ -34,7 +34,7 @@ pip install torch torchvision torchaudio --extra-index-url https://download.pyto
 3. Implement customized optimizer
 4. Implement key-token weighted loss function
 5. Optimize hyper-parameters
-6. Train model for 10 epochs to reduce loss below 3.0
+6. ✔ Train model for 10 epochs to reduce loss below 3.0
 
 #### Inference
 
