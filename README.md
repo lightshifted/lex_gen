@@ -9,7 +9,7 @@ python -m pip install pip setuptools wheel
 python -m pip install -e .
 ```
 
-## Install PyTorch
+### Install PyTorch
 
 ```bash
 pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116
