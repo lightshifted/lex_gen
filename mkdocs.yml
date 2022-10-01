@@ -1,0 +1,15 @@
+site_name: LexGen
+repo_url: https://github.com/masslightsquared/lex_gen
+nav:
+  - Home: index.md
+  - workflows:
+    - main: operations/main.md
+  - operations:
+    - data: operations/data.md
+    - train: operations/train.md
+    - utils: operations/utils.md
+theme: readthedocs
+plugins:
+  - mkdocstrings
+watch:
+  - . # reload docs for any file changes
