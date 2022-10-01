@@ -1,10 +1,24 @@
-from transformers import GPT2Tokenizer, GPT2Config, GPT2ForSequenceClassification, GPT2TokenizerFast
+from transformers import GPT2Tokenizer, GPT2Config, GPT2ForSequenceClassification, GPT2TokenizerFast, BatchEncoding
 from torch.utils.data import Dataset, DataLoader
 from typing import List, Dict
 from config.config import logger
 import torch
+import typing
 
-def tokenize_text(text, model_name: str="gpt2", padding_side: str="right", context_length: int=256, tokenizer_only=False):
+def tokenize_text(text: typing.Union[str, typing.List[str], typing.List[typing.List[str]]] = None
+    , model_name: str="gpt2", padding_side: str="right", context_length: int=256, tokenizer_only: bool=False) -> BatchEncoding:
+    """Prepares inputs for a model. Utilizes Hugging Face's PreTrainedTokenizer base class.
+
+    Args:
+        text (str): The sequence or batch of sequences to be encoded.
+        model_name (str, optional): Model name. Defaults to "gpt2".
+        padding_side (str, optional): The default value for the side on which the model should have padding applied. Should be 'right' or 'left'. Defaults to "right".
+        context_length (int, optional): The length of input sequences fed to the model. Defaults to 256.
+        tokenizer_only (bool, optional): Returns only the instantiated tokenizer class when set to 'True'. Defaults to False.
+
+    Returns:
+        BatchEncoding: (input_ids, attention_mask...)
+    """
     
     # Instantiate tokenizer and pass `gpt2` to the `from_pretrained` method 
     tokenizer = GPT2TokenizerFast.from_pretrained(model_name)
