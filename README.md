@@ -34,11 +34,7 @@ pip install torch torchvision torchaudio --extra-index-url https://download.pyto
 3. Implement customized optimizer
 4. Implement key-token weighted loss function
 5. Optimize hyper-parameters
-<<<<<<< HEAD
-6. Train model for 10 epochs to reduce loss below 3.0
-=======
 6. ✔ Train model for 10 epochs to reduce loss below 3.0
->>>>>>> origin/main
 
 #### Inference
 
@@ -49,6 +45,12 @@ pip install torch torchvision torchaudio --extra-index-url https://download.pyto
 
 1. Create CLI using [Typer](https://typer.tiangolo.com/)
 2. Implement Real-time serving using [FastAPI](https://fastapi.tiangolo.com/#typer-the-fastapi-of-clis)
+
+```bash
+uvicorn app.api:app --host 0.0.0.0 --port 8000 --reload --reload-dir tagifai --reload-dir app  # dev
+gunicorn -c app/gunicorn.py -k uvicorn.workers.UvicornWorker app.api:app  # prod
+```
+
 3. Complete integration with model server (perhaps W&B or MLFLow?)
 
 #### Packaging
