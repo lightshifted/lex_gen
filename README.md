@@ -1,4 +1,8 @@
-### LexGen
+[<img src="https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9-blue.svg" alt="Python 3.7 3.8 3.9">](https://pypi.org/project/pytorch-widedeep/)
+[<img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code style: black">](https://github.com/psf/black)
+[<img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Maintenance">](https://github.com/jrzaurin/pytorch-widedeep/graphs/commit-activity)
+[<img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" alt="contributions welcome">](https://github.com/jrzaurin/pytorch-widedeep/issues)
+## LexGen
 
 Documentation: https://masslightsquared.github.io/lex_gen/
 
