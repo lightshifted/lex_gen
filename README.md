@@ -1,4 +1,6 @@
-### [Project Documentation](https://masslightsquared.github.io/lex_gen/)
+### LexGen
+
+Documentation: https://masslightsquared.github.io/lex_gen/
 
 ### Virtual environment
 
