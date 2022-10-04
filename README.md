@@ -7,21 +7,6 @@
 
 Documentation: https://masslightsquared.github.io/lex_gen/
 
-### Virtual environment
-
-```bash
-python -m venv venv
-& venv/scripts/activate
-python -m pip install pip setuptools wheel
-python -m pip install -e .
-```
-
-### Install PyTorch CUDA
-
-```bash
-pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116
-```
-
 ### To-Do:
 
 #### Training Loop
