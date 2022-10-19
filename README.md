@@ -14,8 +14,8 @@ Documentation: https://masslightsquared.github.io/lex_gen/
 1. Setup pipeline for tracking model metrics and hyperparameters in our designated log (TrainingArguments)
 2. ✔ Write function train() which encapsulates the training loop
 3. Set-up W&B integrations
-4. Set-up Optuna integrations
-5. Obtain optimal training parameters
+4. ✔ Set-up Optuna integrations
+5. ✔ Obtain optimal training parameters
 6. Set-up training of "[gpt2-large](https://huggingface.co/transformers/v2.2.0/pretrained_models.html)" on [Lambda cloud GPUs](https://lambdalabs.com/)
 7. Write customized training loop (migrate from Hugging Face Training class)
 
