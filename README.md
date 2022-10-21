@@ -43,7 +43,7 @@ uvicorn app.api:app --host 0.0.0.0 --port 8000 --reload --reload-dir tagifai --r
 gunicorn -c app/gunicorn.py -k uvicorn.workers.UvicornWorker app.api:app  # prod
 ```
 
-3. Complete integration with model server (perhaps W&B or MLFLow?)
+3. Complete integration with model server
 
 #### Packaging
 
